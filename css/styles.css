@@ -4,11 +4,20 @@
   flex-wrap: wrap;
   gap: 24px;
   max-width: 1128px;
+  justify-content: center;
+  margin: 0px;
+  padding: 0px;
 }
 
-.gallery li {
-  max-width: 360px;
+.gallery .gallery-item {
+  width: 360px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
 }
-.gallery li img {
+.gallery .gallery-item:hover {
+  transform: scale(1.05);
+}
+.gallery .gallery-image {
   width: 100%;
 }

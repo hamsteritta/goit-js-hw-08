@@ -65,12 +65,8 @@ const images = [
 ];
 const mainBox = document.querySelector(".gallery");
 
-
-
-
-
 function getGalleryItem(image) {
-    const changeFrame = `
+  const changeFrame = `
     <li class="gallery-item">
   <a class="gallery-link" href="${image.original}">
     <img
@@ -82,23 +78,30 @@ function getGalleryItem(image) {
   </a>
 </li>
     `;
-    return changeFrame;
+  return changeFrame;
 }
 
 function createGallery() {
-    images.forEach(function (image) {
-        mainBox.insertAdjacentHTML('beforeend', getGalleryItem(image));
-    });
-    createEvents();
+  let galeryHtml = '';
+  images.forEach(function (image) {
+    galeryHtml += getGalleryItem(image);    
+  });
+  mainBox.insertAdjacentHTML('beforeend', galeryHtml);
+  createEvents();
 }
 
-function createEvents() { 
-    const listLiItems = document.querySelectorAll(".gallery li");
-    listLiItems.forEach(function (liItem) {
-        liItem.addEventListener("click",function (event) {
-            console.log(event);
-        });
+function createEvents() {
+  const listLiItems = document.querySelectorAll(".gallery .gallery-item");
+  listLiItems.forEach(function (liItem) {
+    liItem.addEventListener("click", function (event) {
+      event.preventDefault();
+      const selectImg = event.currentTarget.querySelector('.gallery-image');
+      if (selectImg) {
+        const modal = basicLightbox.create(`<img class="modal-image" src="${selectImg.dataset.source}" />`);
+        modal.show();
+      }
     });
+  });
 
 }
 
